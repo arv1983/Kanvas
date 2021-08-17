@@ -121,10 +121,9 @@ class CourseView(APIView):
 
 class ActivitiesView(APIView):
 
-
     permission_classes = [ Facilitador | Instrutor | Estudante2 ]  
     def get(self, request):
-        # return Response({'d':'s'})
+
         current_user = request.user
         # if not current_user.is_staff and not current_user.is_superuser:
 
@@ -143,10 +142,6 @@ class ActivitiesView(APIView):
         serializer = ActivitiesSerializer(get_activitie, many=True)
 
         return Response(serializer.data)
-
-
-
-
 
     authentication_classes = [TokenAuthentication] 
     permission_classes = [ Facilitador | Instrutor ]  
@@ -193,34 +188,6 @@ class ActivitiesView(APIView):
 class StudentActivitiesView(APIView):
 
 
-    authentication_classes = [TokenAuthentication]  
-    permission_classes = [ Facilitador | Instrutor | Estudante2]  
-    def get(self, request):
-
-        current_user = request.user
-        print(current_user.is_staff)
-        # try: 
-        #     if not current_user.is_staff and not current_user.is_superuser:
-        # get_submission = Submission.objects.get(user_id=current_user.id)
-        # serializer = SubmissionsSerializer(get_submission)
-        #     else:
-        print('+++++++++++++++++++++++++++++')
-        print(current_user.id)
-        if current_user.is_staff | current_user.is_superuser:
-            print('aqu')
-            get_submission = Submission.objects.all()
-            serializer = SubmissionsSerializer(get_submission, many=True)
-        else:
-            get_submission = Submission.objects.filter(user_id=current_user.id)
-            serializer = SubmissionsSerializer(get_submission, many=True)
-
-
-        return Response(serializer.data)
-
-
-
-
-
     permission_classes = [ Estudante2 ]  
     authentication_classes = [TokenAuthentication]  
     def post(self, request, activitie_id):
@@ -236,7 +203,39 @@ class StudentActivitiesView(APIView):
         serializer = SubmissionsSerializer(course)
         return Response(serializer.data, status=status.HTTP_201_CREATED) 
 
+    permission_classes = [ Estudante2 | Instrutor | Facilitador]  
+    authentication_classes = [TokenAuthentication]          
+
+
+
+
+    def get(self, request):
+
+        current_user = request.user
+        # if not current_user.is_staff and not current_user.is_superuser:
+    
+        
+        if not current_user.is_staff and not current_user.is_superuser:
+            print(current_user.id)
+            get_activitie = Submission.objects.filter(user_id=current_user.id)
   
+            
+        else:
+            get_activitie = Submission.objects.all()
+
+        
+        
+        # except:
+        #     return Response({"erros": "nao existe atividades"}, status=status.HTTP_403_FORBIDDEN)
+
+        print(get_activitie.__dict__)
+        serializer = SubmissionsSerializer(get_activitie, many=True)
+
+        return Response(serializer.data)
+
+
+
+
 class EditaNotaView(APIView):
     authentication_classes = [TokenAuthentication]  
     permission_classes = [ Facilitador | Instrutor ]  
@@ -247,8 +246,6 @@ class EditaNotaView(APIView):
 
         except:
             Response({"errors": "Invalid submission_id"})
-        
-
         
         serializer = SubmissionGradeSerializer(data=request.data)
 
@@ -262,3 +259,5 @@ class EditaNotaView(APIView):
         serializer = SubmissionsSerializer(submission)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+

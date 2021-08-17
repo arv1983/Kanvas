@@ -14,7 +14,7 @@ urlpatterns = [
     path('submissions/<int:submission_id>/', EditaNotaView.as_view()),
 
     # GET estudante
-    path('submissions/', StudentActivitiesView.as_view()),
+    
 
     #
 
