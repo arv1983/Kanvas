@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework import status, serializers
-from kanvas1.serializers import UserSerializer, LoginSerializer, CourseSerializer, CourseGetSerializer, ActivitiesSerializer, SubmissionsSerializer, SubmissionGradeSerializer
-from kanvas1.permission import Facilitador, Instrutor, Estudante2
+from kanvas1.serializers import UserSerializer, LoginSerializer, CourseSerializer, CourseGetSerializer, ActivitiesSerializer, SubmissionsSerializer, SubmissionGradeSerializer, CourseInsSerializer
+from kanvas1.permission import Facilitador, Instrutor, Estudante2, CourseAuth
 from kanvas1.models import Course, Activity, Submission
 
 # Create your views here.
@@ -52,7 +52,7 @@ class LoginView(APIView):
 
 class CourseView(APIView):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [Instrutor] 
+    permission_classes = [CourseAuth] 
     def post(self, request):
         serializer = CourseSerializer(data=request.data)
         
@@ -74,7 +74,9 @@ class CourseView(APIView):
             course = Course.objects.get(id=course_id)
         except:
             return Response({'errors': 'invalid course_id'}, status=status.HTTP_404_NOT_FOUND)
-
+        if not type(request.data['user_ids']) == list:
+            # request.data['user_ids'] = list([request.data['user_ids']])
+            return Response({'errors': 'invalid course_id'}, status=status.HTTP_400_BAD_REQUEST)
 
         for users in request.data['user_ids']:
             try:
@@ -86,7 +88,7 @@ class CourseView(APIView):
 
         course.users.set(request.data['user_ids'])
         course.save()
-        serializer = CourseSerializer(course)
+        serializer = CourseInsSerializer(course)
         return Response(serializer.data, status=status.HTTP_200_OK)
         
     def get(self, request, course_id=''):
@@ -104,9 +106,7 @@ class CourseView(APIView):
             serializer = CourseGetSerializer(get_course, many=True)
         
         return Response(serializer.data)
-    
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [Instrutor]
+
     def delete(self, request, course_id):
         try:
             get_course = Course.objects.get(id=course_id)
@@ -171,22 +171,24 @@ class ActivitiesView(APIView):
 
 
 
-
-
-
-
-
-
-
-          
-
-
-
-
-
-
 class StudentActivitiesView(APIView):
 
+
+    permission_classes = [ Estudante2 | Instrutor | Facilitador]  
+    authentication_classes = [TokenAuthentication]          
+
+    def get(self, request):
+
+        current_user = request.user
+        if not current_user.is_staff and not current_user.is_superuser:
+            print(current_user.id)
+            get_activitie = Submission.objects.filter(user_id=current_user.id)
+        else:
+            get_activitie = Submission.objects.all()
+
+        serializer = SubmissionsSerializer(get_activitie, many=True)
+
+        return Response(serializer.data)
 
     permission_classes = [ Estudante2 ]  
     authentication_classes = [TokenAuthentication]  
@@ -203,35 +205,6 @@ class StudentActivitiesView(APIView):
         serializer = SubmissionsSerializer(course)
         return Response(serializer.data, status=status.HTTP_201_CREATED) 
 
-    permission_classes = [ Estudante2 | Instrutor | Facilitador]  
-    authentication_classes = [TokenAuthentication]          
-
-
-
-
-    def get(self, request):
-
-        current_user = request.user
-        # if not current_user.is_staff and not current_user.is_superuser:
-    
-        
-        if not current_user.is_staff and not current_user.is_superuser:
-            print(current_user.id)
-            get_activitie = Submission.objects.filter(user_id=current_user.id)
-  
-            
-        else:
-            get_activitie = Submission.objects.all()
-
-        
-        
-        # except:
-        #     return Response({"erros": "nao existe atividades"}, status=status.HTTP_403_FORBIDDEN)
-
-        print(get_activitie.__dict__)
-        serializer = SubmissionsSerializer(get_activitie, many=True)
-
-        return Response(serializer.data)
 
 
 

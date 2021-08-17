@@ -52,17 +52,17 @@ test_wrong_credentials_do_not_login (test_api.TestAccountView) ... ok
 test_facilitator_or_instructor_can_create_an_activity (test_api.TestActivityView) ... ok
 test_facilitator_or_instructor_can_edit_a_submission_grade (test_api.TestActivityView) ... ok
 test_facilitator_or_instructor_can_list_activities (test_api.TestActivityView) ... ok
-test_facilitator_or_instructor_can_view_all_submissions (test_api.TestActivityView) ... ok
-test_facilitator_or_instructor_cannot_submity_an_activity (test_api.TestActivityView) ... FAIL
+test_facilitator_or_instructor_can_view_all_submissions (test_api.TestActivityView) ... FAIL
+test_facilitator_or_instructor_cannot_submity_an_activity (test_api.TestActivityView) ... ok
 test_if_it_is_not_possible_to_create_activities_with_the_same_title (test_api.TestActivityView) ... ok
 test_student_can_submit_an_activity (test_api.TestActivityView) ... ok
 test_student_can_view_only_your_submissions (test_api.TestActivityView) ... ok
 test_student_cannot_edit_a_submission_grade (test_api.TestActivityView) ... ok
 test_student_cannot_list_activities (test_api.TestActivityView) ... ok
 test_students_cannot_create_activities (test_api.TestActivityView) ... ok
-test_anonymous_can_filter_courses (test_api.TestCourseView) ... FAIL
-test_anonymous_can_list_courses (test_api.TestCourseView) ... FAIL
-test_anonymous_cannot_filter_invalid_course (test_api.TestCourseView) ... FAIL
+test_anonymous_can_filter_courses (test_api.TestCourseView) ... ok
+test_anonymous_can_list_courses (test_api.TestCourseView) ... ok
+test_anonymous_cannot_filter_invalid_course (test_api.TestCourseView) ... ok
 test_create_course_with_invalid_token (test_api.TestCourseView) ... ok
 test_create_two_courses_with_the_same_name_generate_the_same_ids (test_api.TestCourseView) ... ok
 test_enroll_students_with_invalid_id (test_api.TestCourseView) ... FAIL
@@ -73,85 +73,15 @@ test_instructor_can_delete_courses (test_api.TestCourseView) ... ok
 test_instructor_can_register_students_on_course (test_api.TestCourseView) ... ok
 test_only_students_can_be_enrolled_in_the_course (test_api.TestCourseView) ... ok
 test_student_or_facilitator_cannot_delete_courses (test_api.TestCourseView) ... ok
-test_whether_a_list_is_entered_to_enroll_students_in_the_course (test_api.TestCourseView) ... ERROR
+test_whether_a_list_is_entered_to_enroll_students_in_the_course (test_api.TestCourseView) ... ok
 
 ======================================================================
-ERROR: test_whether_a_list_is_entered_to_enroll_students_in_the_course (test_api.TestCourseView)
+FAIL: test_facilitator_or_instructor_can_view_all_submissions (test_api.TestActivityView)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/test_api.py", line 381, in test_whether_a_list_is_entered_to_enroll_students_in_the_course
-    response = self.client.put(
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/test.py", line 303, in put
-    response = super().put(
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/test.py", line 213, in put
-    return self.generic('PUT', path, data, content_type, **extra)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/test.py", line 233, in generic
-    return super().generic(
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/django/test/client.py", line 473, in generic
-    return self.request(**r)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/test.py", line 285, in request
-    return super().request(**kwargs)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/test.py", line 237, in request
-    request = super().request(**kwargs)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/django/test/client.py", line 719, in request
-    self.check_exception(response)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/django/test/client.py", line 580, in check_exception
-    raise exc_value
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/django/core/handlers/exception.py", line 47, in inner
-    response = get_response(request)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/django/core/handlers/base.py", line 181, in _get_response
-    response = wrapped_callback(request, *callback_args, **callback_kwargs)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
-    return view_func(*args, **kwargs)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/django/views/generic/base.py", line 70, in view
-    return self.dispatch(request, *args, **kwargs)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/views.py", line 509, in dispatch
-    response = self.handle_exception(exc)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/views.py", line 469, in handle_exception
-    self.raise_uncaught_exception(exc)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
-    raise exc
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/venv/lib/python3.9/site-packages/rest_framework/views.py", line 506, in dispatch
-    response = handler(request, *args, **kwargs)
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/kanvas1/views.py", line 79, in put
-    for users in request.data['user_ids']:
-TypeError: 'int' object is not iterable
-
-======================================================================
-FAIL: test_facilitator_or_instructor_cannot_submity_an_activity (test_api.TestActivityView)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/test_api.py", line 913, in test_facilitator_or_instructor_cannot_submity_an_activity
-    self.assertEqual(submission.status_code, 403)
-AssertionError: 201 != 403
-
-======================================================================
-FAIL: test_anonymous_can_filter_courses (test_api.TestCourseView)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/test_api.py", line 329, in test_anonymous_can_filter_courses
-    self.assertEqual(
-AssertionError: {'detail': 'Authentication credentials were not provided.'} != {'id': 1, 'name': 'course1', 'users': []}
-- {'detail': 'Authentication credentials were not provided.'}
-+ {'id': 1, 'name': 'course1', 'users': []}
-
-======================================================================
-FAIL: test_anonymous_can_list_courses (test_api.TestCourseView)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/test_api.py", line 303, in test_anonymous_can_list_courses
-    self.assertEqual(
-AssertionError: {'detail': 'Authentication credentials were not provided.'} != [{'id': 1, 'name': 'course1', 'users': []}]
-
-======================================================================
-FAIL: test_anonymous_cannot_filter_invalid_course (test_api.TestCourseView)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/home/anderson/Área de Trabalho/Q4/kanvas/test_api.py", line 356, in test_anonymous_cannot_filter_invalid_course
-    self.assertEqual(course_list.json(), {'errors': 'invalid course_id'})
-AssertionError: {'detail': 'Authentication credentials were not provided.'} != {'errors': 'invalid course_id'}
-- {'detail': 'Authentication credentials were not provided.'}
-+ {'errors': 'invalid course_id'}
+  File "/home/anderson/Área de Trabalho/Q4/kanvas/test_api.py", line 1159, in test_facilitator_or_instructor_can_view_all_submissions
+    self.assertListEqual(submissions.json(), [{"id": 1, "grade": None, "repo": "http://gitlab.com/submission1", "user_id": 2, "activity_id": 1},
+AssertionError: First sequence is not a list: {'detail': 'You do not have permission to perform this action.'}
 
 ======================================================================
 FAIL: test_enroll_students_with_invalid_id (test_api.TestCourseView)
@@ -164,9 +94,9 @@ AssertionError: {'errors': 'Only students can be enrolled in the course.'} != {'
 + {'errors': 'invalid user_id list'}
 
 ----------------------------------------------------------------------
-Ran 30 tests in 15.944s
+Ran 30 tests in 15.997s
 
-FAILED (failures=5, errors=1)
+FAILED (failures=2)
 Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
 faci false
 inst true
@@ -187,11 +117,11 @@ inst true
 10
 faci false
 inst true
-{'model': <class 'kanvas1.models.Activity'>, '_db': None, '_hints': {}, '_query': <django.db.models.sql.query.Query object at 0x7fcee6232a90>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None, '_defer_next_filter': False, '_deferred_filter': None}
+{'model': <class 'kanvas1.models.Activity'>, '_db': None, '_hints': {}, '_query': <django.db.models.sql.query.Query object at 0x7f3143d05490>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None, '_defer_next_filter': False, '_deferred_filter': None}
 faci true
 10
 faci true
-{'model': <class 'kanvas1.models.Activity'>, '_db': None, '_hints': {}, '_query': <django.db.models.sql.query.Query object at 0x7fcee628d760>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None, '_defer_next_filter': False, '_deferred_filter': None}
+{'model': <class 'kanvas1.models.Activity'>, '_db': None, '_hints': {}, '_query': <django.db.models.sql.query.Query object at 0x7f3143d60cd0>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None, '_defer_next_filter': False, '_deferred_filter': None}
 faci false
 inst true
 10
@@ -207,17 +137,11 @@ ESTU true
 ESTU true
 ESTU true
 ESTU false
-inst true
-{'model': <class 'kanvas1.models.Submission'>, '_db': None, '_hints': {}, '_query': <django.db.models.sql.query.Query object at 0x7fcee62c2550>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None, '_defer_next_filter': False, '_deferred_filter': None}
-ESTU false
-inst false
-faci true
-{'model': <class 'kanvas1.models.Submission'>, '_db': None, '_hints': {}, '_query': <django.db.models.sql.query.Query object at 0x7fcee6238d30>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None, '_defer_next_filter': False, '_deferred_filter': None}
 faci false
 inst true
 10
 ESTU false
-inst true
+ESTU false
 faci false
 inst true
 10
@@ -246,7 +170,6 @@ ESTU true
 ESTU true
 ESTU true
 2
-{'model': <class 'kanvas1.models.Submission'>, '_db': None, '_hints': {}, '_query': <django.db.models.sql.query.Query object at 0x7fcee61fcc40>, '_result_cache': None, '_sticky_filter': False, '_for_write': False, '_prefetch_related_lookups': (), '_prefetch_done': False, '_known_related_objects': {}, '_iterable_class': <class 'django.db.models.query.ModelIterable'>, '_fields': None, '_defer_next_filter': False, '_deferred_filter': None}
 faci false
 inst true
 10
@@ -260,35 +183,6 @@ faci false
 inst false
 faci false
 inst false
-inst true
-inst false
-inst true
-inst false
-inst true
-inst false
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst false
-inst false
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst true
-inst false
-inst false
-inst true
-inst true
+1
+
+2

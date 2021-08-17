@@ -37,6 +37,19 @@ class Instrutor(BasePermission):
             return False
 
 
+class CourseAuth(BasePermission):
+    def has_permission(self, request, view):
+        user = request.user
+        if request.method == "GET":
+            return True
+        elif user.is_superuser == True | user.is_staff == True:
+            return True
+        else:
+            return False
+
+
+
+
 
 
 # Estudante - terá ambos os campos is_staff e is_superuser com o valor False

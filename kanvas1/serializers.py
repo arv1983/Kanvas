@@ -63,3 +63,11 @@ class SubmissionGradeSerializer(serializers.Serializer):
 
 
 
+
+
+class CourseInsSerializer(serializers.Serializer):
+
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(required=True)
+    users = UserSimpleSerializer(many=True, read_only=True)
+
